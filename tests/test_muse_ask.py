@@ -65,6 +65,14 @@ class MuseAskTest(unittest.TestCase):
             self.muse = str(shim)
 
     def tearDown(self):
+        # Windows releases a killed process tree's handles a moment after taskkill returns.
+        # Retry for a while; a process that really survived still fails the test.
+        for _ in range(20 if WINDOWS else 1):
+            try:
+                self.tmp.cleanup()
+                return
+            except PermissionError:
+                time.sleep(0.5)
         self.tmp.cleanup()
 
     def ask(self, *args, scenario='ok', stdin=None, extra_env=None, timeout=60):
