@@ -115,7 +115,6 @@ Devretmek zaman alır. Bu yüzden tek dosyalık hızlı bakışları Claude kend
 ## Geliştirme
 
 ```
-python3 -m unittest discover -s tests -v   # sahte muse kullanır, ağ gerekmez
 claude --plugin-dir /eklentinin/yolu        # yerel değişiklikleri tek oturumda dene
 ```
 

@@ -115,7 +115,6 @@ Delegation costs wall-clock time, so quick one-file lookups stay with Claude.
 ## Development
 
 ```
-python3 -m unittest discover -s tests -v   # uses a fake muse, no network
 claude --plugin-dir /path/to/clawmuse       # try local changes in one session
 ```
 
