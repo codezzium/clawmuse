@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """UserPromptSubmit: when the user names Muse in a message, make delegation explicit
 for that turn instead of leaving it to Claude's judgement. Silent otherwise, when
 muse is not installed, and inside Muse itself."""
@@ -22,6 +21,10 @@ MENTION = re.compile(r'(?<![\w-])muse(?!um)', re.IGNORECASE)
 def main():
     if os.environ.get('CLAWMUSE_DEPTH') or not shutil.which(os.environ.get('CLAWMUSE_MUSE', 'muse')):
         return
+    try:
+        sys.stdin.reconfigure(encoding='utf-8', errors='replace')
+    except (AttributeError, ValueError):
+        pass
     try:
         prompt = json.load(sys.stdin).get('prompt') or ''
     except (ValueError, AttributeError):

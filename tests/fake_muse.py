@@ -63,10 +63,8 @@ def main():
         delta('A = 1 (a.js:1). ')
         delta('Tests: 3 pass.')
         terminal('completed', 'A = 1 (a.js:1). Tests: 3 pass.')
-    elif scenario == 'bwrap':
-        tool('bash', json.dumps({'command': 'ls', 'exit_code': 1,
-                                 'output': 'bwrap: setting up uid map: Permission denied'}), 'failure')
-        terminal('completed', 'ls failed (sandbox).')
+    elif scenario == 'unicode':
+        terminal('completed', 'Testler geçti: ş ğ ı İ ✓')
     elif scenario == 'failed':
         tool('search', 'nothing')
         terminal('failed', None, 'provider error')

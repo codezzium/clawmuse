@@ -21,8 +21,8 @@ Düzenlemeyi ve son doğrulamayı yine Claude yapar. Muse yalnızca araştırır
 
 - Eklenti desteği olan bir Claude Code.
 - Muse Code: `muse` CLI kurulu ve giriş yapılmış olmalı. Terminalde `muse exec` çalışmalı.
-- Python 3.8 veya üstü.
-- Linux ya da macOS. Windows desteklenmiyor.
+- Python 3.8 veya üstü; `python3`, `python` ya da Windows'taki `py` komutuyla çalışabilmeli. Microsoft Store kısayolları atlanır.
+- Linux, macOS ya da Windows. Windows'ta Claude Code eklentinin betiklerini Git Bash ile çalıştırır.
 
 `muse` kurulu değilse hook'lar hiçbir şey eklemez, Claude her zamanki gibi çalışır.
 
@@ -83,19 +83,11 @@ Görev tarifi stdin'den de verilebilir: `muse-ask -m test - <<'EOF' … EOF`.
 | 127 | `muse` bulunamadı |
 | 143 | Kesildi |
 
-## Sandbox ve `CLAWMUSE_YOLO`
+## İzinler
 
-Varsayılan olarak Muse kendi sandbox'ı içinde, onay istemeden çalışır (`--trust-workspace --approval-mode never`). Başsız çalıştırmada onay verecek kimse olmadığı için onaylar kapalıdır. Araştırma modunda Muse'un dosya yazma araçları da kapalıdır.
+Muse her zaman `--yolo` ile çalışır: sandbox yoktur, onay sorulmaz. Başsız çalıştırmada onay verecek kimse olmadığı için böyledir. Muse, kullanıcı hesabının çalıştırabildiği her komutu çalıştırabilir.
 
-Bazı Linux sunucularında Muse'un sandbox'ı açılamaz; örneğin ayrıcalıksız kullanıcı ad alanlarının kısıtlandığı sistemlerde. Bu durumda Muse'un kabuk komutları çalışmaz ve `muse-ask` raporuna bir uyarı ekler.
-
-Riski kabul ediyorsan, Claude Code için sandbox'sız çalıştırmaya `~/.claude/settings.json` içinden izin verebilirsin:
-
-```json
-{ "env": { "CLAWMUSE_YOLO": "1" } }
-```
-
-Bu ayarla Muse `--yolo` ile çalışır: sandbox da onay da yoktur. Araştırma modunda dosya yazma araçları yine kapalıdır, ama kabuk üzerinden yazmak artık yalnızca talimatla yasaktır, teknik olarak engellenmez. Claude'a bu değişkeni asla kendisinin ayarlamaması söylenir.
+Araştırma modunda Muse'un dosya yazma araçları kapalıdır ve hiçbir şeyi değiştirmemesi söylenir, ama kabuk komutları engellenmez. Eklentiyi ancak bunu kabul ediyorsan kur.
 
 ## Örnek ölçümler
 

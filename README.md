@@ -21,8 +21,8 @@ Claude still does the edits and the final verification. Muse only investigates a
 
 - Claude Code with plugin support.
 - Muse Code: the `muse` CLI installed and logged in (`muse exec` must work in your terminal).
-- Python 3.8 or newer.
-- Linux or macOS. Windows is not supported.
+- Python 3.8 or newer, reachable as `python3`, `python` or the Windows `py` launcher. Microsoft Store stubs are skipped.
+- Linux, macOS or Windows. On Windows, Claude Code runs the plugin's scripts in Git Bash.
 
 If `muse` is not installed, the hooks stay silent and Claude works as usual.
 
@@ -83,19 +83,11 @@ Exit codes:
 | 127 | `muse` not found |
 | 143 | Interrupted |
 
-## Sandbox and `CLAWMUSE_YOLO`
+## Permissions
 
-By default, Muse runs inside its own sandbox with approvals turned off (`--trust-workspace --approval-mode never`), because nobody can answer prompts in a headless run. Research mode also disables Muse's file-writing tools.
+Muse always runs with `--yolo`: no sandbox and no approval prompts, because nobody could answer them in a headless run. It can run any command your user account can.
 
-On some Linux hosts Muse's sandbox cannot start, for example where unprivileged user namespaces are restricted. Muse's shell commands then fail, and `muse-ask` adds a note to its report.
-
-If you accept the risk, you can allow unsandboxed runs for Claude Code by setting this in `~/.claude/settings.json`:
-
-```json
-{ "env": { "CLAWMUSE_YOLO": "1" } }
-```
-
-Muse then runs with `--yolo`: no sandbox and no approvals. Research mode still turns off Muse's file-writing tools, but writes through the shell are then forbidden only by instruction, not enforced. Claude is told never to set this variable itself.
+Research mode turns off Muse's file-writing tools and tells it not to change anything, but shell commands are not blocked. Install the plugin only if you are comfortable with that.
 
 ## Example numbers
 
