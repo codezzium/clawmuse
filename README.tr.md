@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/clawmuse.png" alt="clawmuse: more discovery, fewer tokens" width="240">
+</p>
+
 # clawmuse
 
 [English](README.md)
