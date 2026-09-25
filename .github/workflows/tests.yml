@@ -16,4 +16,13 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: python -m unittest discover -s tests -v
+      - name: unittest
+        shell: bash
+        run: |
+          set +e
+          python -m unittest discover -s tests -v > test.log 2>&1
+          status=$?
+          cat test.log
+          # Surface each failure as an annotation so it is readable without opening the log.
+          [ $status -eq 0 ] || python .github/annotate_failures.py test.log
+          exit $status
