@@ -1,0 +1,12 @@
+{
+  "name": "clawmuse",
+  "description": "Marketplace for the clawmuse plugin.",
+  "owner": { "name": "codezzium", "url": "https://github.com/codezzium" },
+  "plugins": [
+    {
+      "name": "clawmuse",
+      "source": "./",
+      "description": "Delegates research and test runs to Muse so Claude spends fewer tokens."
+    }
+  ]
+}
