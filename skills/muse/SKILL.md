@@ -10,12 +10,12 @@ allowed-tools: Bash(muse-ask *)
 `muse-ask` runs Muse headless and prints only Muse's final report plus one footer line. Muse cannot see this conversation: the brief must stand on its own.
 
 ```
-muse-ask [-m research|test] [-C DIR] [-e low|medium|high|max] [-w WORDS] [-t SECS] [-c SESSION] [-i IMAGE] "brief"
+muse-ask [-m research|test] [-C DIR] [-w WORDS] [-t SECS] [-c SESSION] [-i IMAGE] "brief"
 ```
 (or pipe a longer brief on stdin: `muse-ask -m test - <<'EOF' ... EOF`)
 
 - `-m research` (default) is read-only: Muse's edit tools are off and it is told not to change state. `-m test` may run tests, builds and containers but not edit source, commit or deploy.
-- `-C` workspace (default: cwd). `-e` effort (default: Muse's setting, which is slow and thorough); use `-e low` or `-e medium` for simple lookups.
+- `-C` workspace (default: cwd). Muse always runs muse-spark-1.3 at max effort; this is fixed and there is no option to change it.
 - `-w` report word budget (default 300). `-t` Muse timeout in seconds (default 540).
 - `-c SESSION` asks a follow-up in the same Muse session, which still holds everything it read. Use it instead of re-briefing.
 - Footer: `[muse · mode · time · N tools, X chars read · session ID · log PATH]`. The .md log holds every tool output Muse saw (test output, file reads). Grep it instead of re-running anything.

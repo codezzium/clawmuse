@@ -53,7 +53,7 @@ Start a new session afterwards. To receive updates, turn on auto-update for the 
 ### muse-ask
 
 ```
-muse-ask [-m research|test] [-C DIR] [-e EFFORT] [-w WORDS] [-t SECS] [-c SESSION] [-i IMAGE] "brief"
+muse-ask [-m research|test] [-C DIR] [-w WORDS] [-t SECS] [-c SESSION] [-i IMAGE] "brief"
 ```
 
 | Option | Meaning |
@@ -61,11 +61,12 @@ muse-ask [-m research|test] [-C DIR] [-e EFFORT] [-w WORDS] [-t SECS] [-c SESSIO
 | `-m research` | Default. Muse's file-writing tools are off, and it is told not to change any state. |
 | `-m test` | May run tests, builds and containers. Must not edit source, commit or deploy. |
 | `-C DIR` | Workspace for Muse. Default: the current directory. |
-| `-e EFFORT` | Muse reasoning effort (`low` … `max`). Default: Muse's own setting. |
 | `-w WORDS` | Word budget for the report. Default: 300. |
 | `-t SECS` | Stop Muse after this many seconds. Default: 540. |
 | `-c SESSION` | Ask a follow-up in an earlier Muse session. Muse keeps everything it already read. |
 | `-i IMAGE` | Attach an image. Can be repeated. |
+
+Muse always runs `muse-spark-1.3` at `max` reasoning effort. This is fixed on purpose: neither Claude nor the user chooses it per call.
 
 The brief can also come from stdin: `muse-ask -m test - <<'EOF' … EOF`.
 

@@ -1,7 +1,7 @@
 {
   "name": "clawmuse",
   "displayName": "ClawMuse",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Delegates research and test runs to Muse (Meta's Muse Spark agent) so Claude spends fewer tokens: Claude writes a brief, Muse does the reading and running, and only its report comes back.",
   "author": { "name": "codezzium", "url": "https://github.com/codezzium" },
   "homepage": "https://github.com/codezzium/clawmuse",

@@ -65,7 +65,8 @@ class MuseAskTest(unittest.TestCase):
             self.assertIn(flag, rec['argv'])
         self.assertEqual(rec['argv'][rec['argv'].index('--approval-mode') + 1], 'never')
         self.assertNotIn('--yolo', rec['argv'])
-        self.assertNotIn('--reasoning-effort', rec['argv'])
+        self.assertEqual(rec['argv'][rec['argv'].index('--model') + 1], 'muse-spark-1.3')
+        self.assertEqual(rec['argv'][rec['argv'].index('--reasoning-effort') + 1], 'max')
         self.assertEqual(Path(rec['cwd']).resolve(), self.work.resolve())
         self.assertEqual(rec['depth'], '1')
         self.assertIn('MODE: RESEARCH', rec['prompt'])
@@ -77,18 +78,24 @@ class MuseAskTest(unittest.TestCase):
         other.mkdir()
         img = self.dir / 'shot.png'
         img.write_bytes(b'png')
-        r = self.ask('-m', 'test', '-C', str(other), '-e', 'low', '-w', '120', '-s', '7',
+        r = self.ask('-m', 'test', '-C', str(other), '-w', '120', '-s', '7',
                      '-i', str(img), 'run the tests')
         self.assertEqual(r.returncode, 0, r.stderr)
         rec = self.recorded()
         argv = rec['argv']
         self.assertNotIn('--disable-write', argv)
-        self.assertEqual(argv[argv.index('--reasoning-effort') + 1], 'low')
+        self.assertEqual(argv[argv.index('--reasoning-effort') + 1], 'max')
         self.assertEqual(argv[argv.index('--max-model-steps') + 1], '7')
         self.assertEqual(argv[argv.index('--image') + 1], str(img.resolve()))
         self.assertEqual(Path(rec['cwd']).resolve(), other.resolve())
         self.assertIn('MODE: TEST', rec['prompt'])
         self.assertIn('At most ~120 words', rec['prompt'])
+
+    def test_model_and_effort_cannot_be_chosen(self):
+        for flag in ('-e', '--effort', '--model', '--reasoning-effort'):
+            r = self.ask(flag, 'low', 'x')
+            self.assertEqual(r.returncode, 2, flag)
+            self.assertFalse(self.record.exists(), flag)
 
     def test_yolo_is_opt_in(self):
         self.ask('x', extra_env={'CLAWMUSE_YOLO': '1'})

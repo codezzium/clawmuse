@@ -53,7 +53,7 @@ Kurduktan sonra yeni bir oturum aç. Güncellemeleri almak için `/plugin` menü
 ### muse-ask
 
 ```
-muse-ask [-m research|test] [-C DIZIN] [-e EFOR] [-w KELIME] [-t SANIYE] [-c OTURUM] [-i RESIM] "görev"
+muse-ask [-m research|test] [-C DIZIN] [-w KELIME] [-t SANIYE] [-c OTURUM] [-i RESIM] "görev"
 ```
 
 | Seçenek | Anlamı |
@@ -61,11 +61,12 @@ muse-ask [-m research|test] [-C DIZIN] [-e EFOR] [-w KELIME] [-t SANIYE] [-c OTU
 | `-m research` | Varsayılan. Muse'un dosya yazma araçları kapalıdır ve hiçbir şeyi değiştirmemesi söylenir. |
 | `-m test` | Test, derleme ve konteyner çalıştırabilir. Kaynak kodu düzenleyemez, commit ve deploy yapamaz. |
 | `-C DIZIN` | Muse'un çalışacağı dizin. Varsayılan: bulunulan dizin. |
-| `-e EFOR` | Muse'un düşünme eforu (`low` … `max`). Varsayılan: Muse'un kendi ayarı. |
 | `-w KELIME` | Rapor için kelime sınırı. Varsayılan: 300. |
 | `-t SANIYE` | Muse bu kadar saniye sonra durdurulur. Varsayılan: 540. |
 | `-c OTURUM` | Önceki bir Muse oturumunda takip sorusu sorar. Muse daha önce okuduklarını hatırlar. |
 | `-i RESIM` | Görsel ekler. Birden çok kez verilebilir. |
+
+Muse her zaman `muse-spark-1.3` modeliyle ve `max` effort ile çalışır. Bu bilerek sabitlendi: ne Claude ne kullanıcı çağrı başına değiştirebilir.
 
 Görev tarifi stdin'den de verilebilir: `muse-ask -m test - <<'EOF' … EOF`.
 
