@@ -85,7 +85,7 @@ class MuseAskTest(unittest.TestCase):
         self.assertNotIn('--disable-write', argv)
         self.assertEqual(argv[argv.index('--reasoning-effort') + 1], 'low')
         self.assertEqual(argv[argv.index('--max-model-steps') + 1], '7')
-        self.assertEqual(argv[argv.index('--image') + 1], str(img))
+        self.assertEqual(argv[argv.index('--image') + 1], str(img.resolve()))
         self.assertEqual(Path(rec['cwd']).resolve(), other.resolve())
         self.assertIn('MODE: TEST', rec['prompt'])
         self.assertIn('At most ~120 words', rec['prompt'])
